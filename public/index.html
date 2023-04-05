@@ -8,7 +8,36 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    hoge
+    <h2 class="heading">商品写真</h2>
+    <form action="#" method="get">
+      <ul class="images margin-bottom-large">
+        <li>
+          <img src="images/150x150.png" alt="サンプル画像" width="150" height="150" />
+          <button type="button" class="image-settings">
+            <img
+              src="images/icon/gear.svg"
+              alt="設定アイコン"
+              width="20"
+              height="20"
+              class="image-settings-icon"
+            />
+            <p class="image-settings-icon">設定</p>
+          </button>
+        </li>
+      </ul>
+      <button class="button-fileUpload margin-bottom-small">
+        <img
+          src="images/icon/file.svg"
+          alt="ファイルアイコン"
+          width="20"
+          height="20"
+          class="button-fileUpload-icon"
+        />
+        <p>ファイルを選択して下さい</p>
+      </button>
+      <input type="file" multiple class="button-fileUpload-input" />
+      <button type="submit" class="button-save">保存</button>
+    </form>
   </body>
   <script type="text/javascript" src="javascript/index.js"></script>
 </html>

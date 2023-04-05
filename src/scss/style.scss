@@ -1,3 +1,93 @@
+@use 'base/index.scss';
+
 body {
-  padding: 10px;
+  font-size: 10px;
+  padding: 18px;
+}
+
+.margin {
+  &-bottom {
+    &-xsmall {
+      margin-block-end: 8px;
+    }
+    &-small {
+      margin-block-end: 12px;
+    }
+    &-medium {
+      margin-block-end: 16px;
+    }
+    &-large {
+      margin-block-end: 20px;
+    }
+  }
+}
+
+.images {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(10, 150px);
+  column-gap: 16px;
+  overflow-x: scroll;
+
+  & > li {
+    position: relative;
+  }
+}
+
+.image-settings {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+  padding: 6px;
+  background-color: rgba(#000, 0.15);
+  font-size: 1rem;
+}
+
+.image-settings-icon {
+  margin-right: 4px;
+}
+
+.heading {
+  font-size: 1.8rem;
+  margin-block-end: 20px;
+  padding-block-end: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.button-fileUpload {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 12px;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  background-color: #f4f4f4;
+}
+
+.button-fileUpload-icon {
+  margin-right: 4px;
+}
+
+.button-fileUpload-input {
+  display: none;
+}
+
+.button-save {
+  display: block;
+  cursor: pointer;
+  width: 500px;
+  padding: 4px 12px;
+  font-size: 1.4rem;
+  border-radius: 2px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgb(110, 204, 158);
+
+  @media screen and (max-width: 414px) {
+    width: 100%;
+  }
 }
