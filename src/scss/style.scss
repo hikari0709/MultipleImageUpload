@@ -34,20 +34,52 @@ body {
   }
 }
 
-.image-settings {
+.icon-gear {
   position: absolute;
-  display: flex;
-  align-items: center;
   top: 6px;
   right: 6px;
   cursor: pointer;
-  padding: 6px;
+  padding: 4px;
   background-color: rgba(#000, 0.15);
-  font-size: 1rem;
 }
 
-.image-settings-icon {
+.fileActions {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 90px;
+  padding: 2px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &.is-hide {
+    display: none;
+  }
+}
+
+.fileActions-itme {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
+
+  &.fileActions-itme-remove {
+    color: #c85151;
+  }
+}
+
+.fileActions-itme-icon {
   margin-right: 4px;
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
 }
 
 .heading {
@@ -72,7 +104,7 @@ body {
 }
 
 .button-fileUpload-input {
-  display: none;
+  //display: none;
 }
 
 .button-save {
