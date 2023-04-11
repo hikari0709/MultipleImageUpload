@@ -41,22 +41,32 @@ body {
   cursor: pointer;
   padding: 4px;
   background-color: rgba(#000, 0.15);
+
+  &.is-hide {
+    display: none;
+  }
 }
 
 .fileActions {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 2px;
+  right: 2px;
+
+  &.is-hide {
+    display: none;
+  }
+}
+
+.fileActions-list {
+  position: absolute;
+  top: 9px;
+  right: 12px;
   width: 90px;
   padding: 2px;
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
-
-  &.is-hide {
-    display: none;
-  }
 }
 
 .fileActions-itme {
@@ -73,6 +83,16 @@ body {
   &.fileActions-itme-remove {
     color: #c85151;
   }
+}
+
+.fileActions-close {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 25px;
+  height: 25px;
+  z-index: 10;
+  background-color: #fff;
 }
 
 .fileActions-itme-icon {
