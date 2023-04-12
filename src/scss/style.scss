@@ -28,10 +28,10 @@ body {
   grid-template-columns: repeat(10, 150px);
   column-gap: 16px;
   overflow-x: scroll;
+}
 
-  & > li {
-    position: relative;
-  }
+.images-item {
+  position: relative;
 }
 
 .icon-gear {
@@ -51,6 +51,8 @@ body {
   position: absolute;
   top: 2px;
   right: 2px;
+  width: 90px;
+  height: 86px;
 
   &.is-hide {
     display: none;
@@ -69,7 +71,7 @@ body {
   border-radius: 4px;
 }
 
-.fileActions-itme {
+.fileActions-item {
   display: flex;
   align-items: center;
   padding: 4px 8px;
@@ -80,7 +82,7 @@ body {
     border-bottom: 1px solid #ddd;
   }
 
-  &.fileActions-itme-remove {
+  &.fileActions-item-remove {
     color: #c85151;
   }
 }
@@ -89,17 +91,13 @@ body {
   position: absolute;
   top: 2px;
   right: 2px;
-  width: 25px;
-  height: 25px;
   z-index: 10;
   background-color: #fff;
+  cursor: pointer;
 }
 
-.fileActions-itme-icon {
+.fileActions-item-icon {
   margin-right: 4px;
-  width: 15px;
-  height: 15px;
-  fill: currentColor;
 }
 
 .heading {
