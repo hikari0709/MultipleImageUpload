@@ -9,19 +9,15 @@
   </head>
   <body>
     <h2 class="heading">商品写真</h2>
-    <form action="#" method="">
+    <form
+      id="js-fileUpload"
+      name="fileUpload"
+      action="http://httpbin.org/get"
+      method="get"
+      enctype="multipart/form-data"
+    >
       <ul id="js-preview" class="images margin-bottom-large"></ul>
-      <!-- <button id="js-upload" class="button-fileUpload margin-bottom-small">
-        <img
-          src="images/icon/file.png"
-          alt="ファイルアイコン"
-          width="20"
-          height="20"
-          class="button-fileUpload-icon"
-        />
-        <p>ファイルを選択して下さい</p>
-      </button> -->
-      <input type="file" multiple class="button-fileUpload-input" id="js-upload-input" />
+      <input name="file" type="file" multiple class="margin-bottom-xlarge" id="js-upload-input" />
       <button type="submit" id="js-save" class="button-save">保存</button>
     </form>
   </body>

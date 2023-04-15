@@ -1,5 +1,6 @@
 import '../scss/style.scss';
 
+//const form = document.getElementById('js-fileUpload');
 const uploadInput = document.getElementById('js-upload-input');
 const saveButton = document.getElementById('js-save');
 const preview = document.getElementById('js-preview');
@@ -51,8 +52,19 @@ uploadInput.addEventListener('change', () => {
   addEvents();
 });
 
-saveButton.addEventListener('click', () => {
-  console.log('save');
+saveButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  const form = document.forms.namedItem('fileUpload');
+  const formData = new FormData(form);
+  console.log(formData);
+
+  const request = new XMLHttpRequest();
+  request.open('GET', 'http://httpbin.org/get?t=1&h=2', true);
+  request.onload = () => {
+    const outputText = request.status === 200 ? 'Uploaded!' : `Error ${request.status}`;
+    alert(outputText);
+  };
+  request.send(formData);
 });
 
 function getPreviewList() {

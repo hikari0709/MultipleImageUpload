@@ -19,6 +19,9 @@ body {
     &-large {
       margin-block-end: 20px;
     }
+    &-xlarge {
+      margin-block-end: 24px;
+    }
   }
 }
 
@@ -134,10 +137,6 @@ body {
 
 .button-fileUpload-icon {
   margin-right: 4px;
-}
-
-.button-fileUpload-input {
-  //display: none;
 }
 
 .button-save {
