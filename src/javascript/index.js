@@ -219,6 +219,9 @@ function addEvents() {
     element.addEventListener('click', (event) => {
       console.log('delete');
       event.stopImmediatePropagation();
+      const clickedButton = event.currentTarget;
+      const removeTarget = clickedButton.closest('.images-item');
+      removeTarget.remove();
     });
   });
 
