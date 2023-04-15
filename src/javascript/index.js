@@ -23,20 +23,10 @@ const actionsAssets = {
   },
 };
 
-const settingButton = document.querySelectorAll('.js-image-settings');
-settingButton.forEach((element) => {
-  element.addEventListener('click', () => {
-    console.log('setting');
-  });
-});
-
-// TODO:一度目にアップロードした画像がリセットされずに残っている
-// TODO:一度目の状態を保存したままに追加ができるように修正する必要がある
-
 uploadInput.addEventListener('change', () => {
   const fileList = getUploadFileList();
 
-  // Chromeでは動くが他のブラウザの場合要注意
+  // Chromeでは動くがブラウザの互換性がない
   if (fileList.length === 0) return;
 
   const previewItems = createPreviewList(fileList);
@@ -217,7 +207,6 @@ function addEvents() {
   // 画像削除
   fileDelete.forEach((element) => {
     element.addEventListener('click', (event) => {
-      console.log('delete');
       event.stopImmediatePropagation();
       const clickedButton = event.currentTarget;
       const removeTarget = clickedButton.closest('.images-item');
@@ -228,8 +217,9 @@ function addEvents() {
   // アクションリストの非表示
   fileActionClose.forEach((element) => {
     element.addEventListener('click', (event) => {
-      console.log('close');
       event.stopImmediatePropagation();
+      const clickedButton = event.currentTarget;
+      hideFileActionList(clickedButton);
     });
   });
 }
@@ -237,14 +227,12 @@ function addEvents() {
 function handleImageMove(clickedButton, movement) {
   // TODO: 選択要素と入れ替え先要素のindexを取得する関数として定義し直す
   const imageItem = clickedButton.closest('.images-item');
-
-  // TODO：rightの文字列送りたくないけど一旦このまま実装
   const [clickedObjectIndex, targetObjectIndex] = getObjectIndex(imageItem, movement);
 
   // 入れ替え対象のitemがあるか確認
   const listItems = getPreviewList();
   if (!listItems[targetObjectIndex]) {
-    alert('対象の画像が見つかりません');
+    alert('入れ替え対象の画像が見つかりません');
     hideFileActionList(clickedButton);
     return;
   }
@@ -252,14 +240,14 @@ function handleImageMove(clickedButton, movement) {
   hideFileActionList(clickedButton);
 
   // 入れ替えた後の配列を返す
-  const replacedListItem = replaceRightElement(listItems, clickedObjectIndex, targetObjectIndex);
+  const replacedListItem = replaceImageNextTo(listItems, clickedObjectIndex, targetObjectIndex);
 
   // 入れ替えた後の要素を再描画
   redrawingImageList(replacedListItem);
 }
 
 // 画像の位置を入れ替える
-function replaceRightElement(listItems, sourceIndex, targetIndex) {
+function replaceImageNextTo(listItems, sourceIndex, targetIndex) {
   const array = Array.from(listItems);
   [array[targetIndex], array[sourceIndex]] = [array[sourceIndex], array[targetIndex]];
 

@@ -25,9 +25,24 @@ body {
 .images {
   display: grid;
   width: 100%;
+  height: 154px;
   grid-template-columns: repeat(10, 150px);
   column-gap: 16px;
   overflow-x: scroll;
+
+  &:empty {
+    border: 1px dashed #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    &::after {
+      content: '画像をアップロードしてください';
+      font-size: 16px;
+      color: #bbb;
+    }
+  }
 }
 
 .images-item {
@@ -140,4 +155,8 @@ body {
   @media screen and (max-width: 414px) {
     width: 100%;
   }
+}
+
+.is-hide {
+  display: none !important;
 }
