@@ -39,19 +39,24 @@ uploadInput.addEventListener('change', () => {
 
 saveButton.addEventListener('click', (event) => {
   event.preventDefault();
-  const form = document.forms.namedItem('fileUpload');
-  const formData = new FormData(form);
+  const fileData = getUploadFileList();
+
+  if (fileData.length < 0) {
+    alert('保存する画像が登録されていません。');
+    return;
+  }
+
+  const sendData = new FormData();
+  for (let i = 0; i < fileData.length; i++) {
+    sendData.append(`image${i}`, fileData[i].name);
+  }
 
   const request = new XMLHttpRequest();
-  request.open('GET', 'http://httpbin.org/get?t=1&h=2', true);
-  request.onload = () => {
-    const outputText =
-      request.status === 200
-        ? '画像の保存が完了しました。'
-        : `エラーが発生しました。 ${request.status}時間が経ってからやり直すか、問い合わせフォームよりお問い合わせください。`;
-    alert(outputText);
-  };
-  request.send(formData);
+  request.open('GET', 'http://httpbin.org/get', false);
+  request.send(sendData);
+  request.addEventListener('readystatechange', () => {
+    alert('画像の保存が完了しました。');
+  });
 });
 
 function getPreviewList() {
