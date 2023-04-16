@@ -250,7 +250,7 @@ function replaceImageNextTo(listItems, sourceIndex, targetIndex) {
   [array[targetIndex], array[sourceIndex]] = [array[sourceIndex], array[targetIndex]];
 
   // data-indexの付け替え
-  [array[0].dataset.index, array[1].dataset.index] = [0, 1];
+  [array[targetIndex].dataset.index, array[sourceIndex].dataset.index] = [targetIndex, sourceIndex];
   return array;
 }
 
