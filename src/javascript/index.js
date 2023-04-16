@@ -1,10 +1,9 @@
 import '../scss/style.scss';
 
-//const form = document.getElementById('js-fileUpload');
 const uploadInput = document.getElementById('js-upload-input');
 const saveButton = document.getElementById('js-save');
 const preview = document.getElementById('js-preview');
-let firstTime = true;
+let uploadImageIndex = 0;
 
 const actionsAssets = {
   left: {
@@ -31,23 +30,9 @@ uploadInput.addEventListener('change', () => {
   if (fileList.length === 0) return;
 
   const previewItems = createPreviewList(fileList);
-
-  // TODO:(要修正)初回の場合サンプル用のリストを削除、それ以降は追加できるように分岐
-  if (firstTime) {
-    preview.innerHTML = '';
-    preview.appendChild(previewItems);
-    firstTime = false;
-  } else {
-    let fragment = document.createDocumentFragment();
-    // TODO: listがない時のデザインはCSSで制御してJSでの制御をやめる
-    const sampleItems = getPreviewList();
-    for (let i = 0; i < sampleItems.length; i++) {
-      const listItemDom = sampleItems[i];
-      fragment.append(listItemDom);
-    }
-    preview.appendChild(fragment);
-    preview.appendChild(previewItems);
-  }
+  const sampleItems = getPreviewList();
+  drawingImageList(sampleItems);
+  preview.appendChild(previewItems);
 
   addEvents();
 });
@@ -56,7 +41,6 @@ saveButton.addEventListener('click', (event) => {
   event.preventDefault();
   const form = document.forms.namedItem('fileUpload');
   const formData = new FormData(form);
-  console.log(formData);
 
   const request = new XMLHttpRequest();
   request.open('GET', 'http://httpbin.org/get?t=1&h=2', true);
@@ -81,8 +65,9 @@ function createPreviewList(fileData) {
   let fragment = document.createDocumentFragment();
 
   for (let i = 0; i < fileData.length; i++) {
-    const listItemDom = new createImageItem(fileData[i], i);
+    const listItemDom = new createImageItem(fileData[i]);
     fragment.append(listItemDom);
+    updateUploadImageIndex();
   }
   return fragment;
 }
@@ -145,12 +130,13 @@ function createActionsListItem(jsHook, iconName, text) {
   return li;
 }
 
-function createImageItem(fileData, index) {
+function createImageItem(fileData) {
   const listItem = document.createElement('li');
   const thumbnail = document.createElement('img');
   const button = document.createElement('button');
   const gearIcon = document.createElement('img');
   const actions = createActions();
+  const index = uploadImageIndex;
 
   const fileReader = new FileReader();
   fileReader.readAsDataURL(fileData);
@@ -255,7 +241,7 @@ function handleImageMove(clickedButton, movement) {
   const replacedListItem = replaceImageNextTo(listItems, clickedObjectIndex, targetObjectIndex);
 
   // 入れ替えた後の要素を再描画
-  redrawingImageList(replacedListItem);
+  drawingImageList(replacedListItem);
 }
 
 // 画像の位置を入れ替える
@@ -269,7 +255,7 @@ function replaceImageNextTo(listItems, sourceIndex, targetIndex) {
 }
 
 // 画像入れ替え後の再描画処理
-function redrawingImageList(array) {
+function drawingImageList(array) {
   let fragment = document.createDocumentFragment();
   for (let i = 0; i < array.length; i++) {
     const listItemDom = array[i];
@@ -297,4 +283,8 @@ function getObjectIndex(item, movement) {
   }
 
   return [sourceObjectIndex, targetObjectIndex];
+}
+
+function updateUploadImageIndex() {
+  uploadImageIndex = uploadImageIndex + 1;
 }
