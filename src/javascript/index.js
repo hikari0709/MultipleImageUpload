@@ -34,7 +34,7 @@ uploadInput.addEventListener('change', () => {
   drawingImageList(sampleItems);
   preview.appendChild(previewItems);
 
-  addEvents();
+  addFileActionEvents();
 });
 
 saveButton.addEventListener('click', (event) => {
@@ -73,14 +73,14 @@ function createPreviewList(fileData) {
   let fragment = document.createDocumentFragment();
 
   for (let i = 0; i < fileData.length; i++) {
-    const listItemDom = new createImageItem(fileData[i]);
+    const listItemDom = new createImageItemNode(fileData[i]);
     fragment.append(listItemDom);
     updateUploadImageIndex();
   }
   return fragment;
 }
 
-function createActions() {
+function createFileActionsNode() {
   const div = document.createElement('div');
   const list = document.createElement('ul');
   const closeButton = document.createElement('img');
@@ -93,7 +93,7 @@ function createActions() {
   let actionItems = {};
 
   for (const property in actionsAssets) {
-    actionItems[property] = createActionsListItem(
+    actionItems[property] = createFileActionsListItemNode(
       actionsAssets[property].hook,
       actionsAssets[property].imgName,
       actionsAssets[property].text
@@ -110,7 +110,7 @@ function createActions() {
   return div;
 }
 
-function createActionsListItem(jsHook, iconName, text) {
+function createFileActionsListItemNode(jsHook, iconName, text) {
   const li = document.createElement('li');
   const img = document.createElement('img');
   const p = document.createElement('p');
@@ -130,12 +130,12 @@ function createActionsListItem(jsHook, iconName, text) {
   return li;
 }
 
-function createImageItem(fileData) {
+function createImageItemNode(fileData) {
   const listItem = document.createElement('li');
   const thumbnail = document.createElement('img');
   const button = document.createElement('button');
   const gearIcon = document.createElement('img');
-  const actions = createActions();
+  const actions = createFileActionsNode();
   const index = uploadImageIndex;
 
   const fileReader = new FileReader();
@@ -167,7 +167,7 @@ function createImageItem(fileData) {
   return listItem;
 }
 
-function addEvents() {
+function addFileActionEvents() {
   // fileに対するアクションを実施するためのフックとなるelementの取得
   const fileMoveRight = document.querySelectorAll('.js-file-moveRight');
   const fileMoveLeft = document.querySelectorAll('.js-file-moveLeft');
