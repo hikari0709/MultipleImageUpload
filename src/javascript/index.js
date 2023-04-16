@@ -45,7 +45,10 @@ saveButton.addEventListener('click', (event) => {
   const request = new XMLHttpRequest();
   request.open('GET', 'http://httpbin.org/get?t=1&h=2', true);
   request.onload = () => {
-    const outputText = request.status === 200 ? 'Uploaded!' : `Error ${request.status}`;
+    const outputText =
+      request.status === 200
+        ? '画像の保存が完了しました。'
+        : `エラーが発生しました。 ${request.status}時間が経ってからやり直すか、問い合わせフォームよりお問い合わせください。`;
     alert(outputText);
   };
   request.send(formData);
@@ -209,6 +212,12 @@ function addEvents() {
       const clickedButton = event.currentTarget;
       const removeTarget = clickedButton.closest('.images-item');
       removeTarget.remove();
+      const listItem = getPreviewList();
+      updateUploadImageIndex('remove');
+
+      for (let i = 0; i < listItem.length; i++) {
+        listItem[i].dataset.index = i;
+      }
     });
   });
 
@@ -285,6 +294,10 @@ function getObjectIndex(item, movement) {
   return [sourceObjectIndex, targetObjectIndex];
 }
 
-function updateUploadImageIndex() {
-  uploadImageIndex = uploadImageIndex + 1;
+function updateUploadImageIndex(action) {
+  if (action === 'remove') {
+    uploadImageIndex = uploadImageIndex - 1;
+  } else {
+    uploadImageIndex = uploadImageIndex + 1;
+  }
 }
