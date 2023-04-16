@@ -90,26 +90,18 @@ function createActions() {
   closeButton.classList.add('fileActions-close', 'js-fileActions-close');
   closeButton.src = 'images/icon/close.png';
 
-  // TODO:actionsのlistItemの生成ループで回せるようにする classにしてメソッドとして持たせた方が良さそう
-  const actionsListItemRight = createActionsListItem(
-    actionsAssets.right.hook,
-    actionsAssets.right.imgName,
-    actionsAssets.right.text
-  );
-  const actionsListItemLeft = createActionsListItem(
-    actionsAssets.left.hook,
-    actionsAssets.left.imgName,
-    actionsAssets.left.text
-  );
-  const actionsListItemDust = createActionsListItem(
-    actionsAssets.remove.hook,
-    actionsAssets.remove.imgName,
-    actionsAssets.remove.text
-  );
+  let actionItems = {};
 
-  list.appendChild(actionsListItemRight);
-  list.appendChild(actionsListItemLeft);
-  list.appendChild(actionsListItemDust);
+  for (const property in actionsAssets) {
+    actionItems[property] = createActionsListItem(
+      actionsAssets[property].hook,
+      actionsAssets[property].imgName,
+      actionsAssets[property].text
+    );
+
+    list.appendChild(actionItems[property]);
+  }
+
   list.classList.add('fileActions-list');
 
   div.appendChild(closeButton);
@@ -237,7 +229,6 @@ function addEvents() {
 }
 
 function handleImageMove(clickedButton, movement) {
-  // TODO: 選択要素と入れ替え先要素のindexを取得する関数として定義し直す
   const imageItem = clickedButton.closest('.images-item');
   const [clickedObjectIndex, targetObjectIndex] = getObjectIndex(imageItem, movement);
 
